@@ -54,11 +54,11 @@ LedgerCOBOL is a **classic core banking system** implemented in COBOL, demonstra
 ### 🔐 **Login System**
 Secure PIN-based authentication with account lockout after 3 failed attempts.
 
+### 📝 **User Registration**
+New users can register their own account with username and PIN.
+
 ### 🗄️ **Database Initialization**
 Creates sample account and user data for testing.
-
-### 💸 **Transaction Processing**
-Supports real-time deposits and withdrawals with balance validation.
 
 </td>
 <td width="50%">
@@ -66,8 +66,8 @@ Supports real-time deposits and withdrawals with balance validation.
 ### 👥 **Role-Based Access**
 Three user roles: Admin, Teller, and Customer with different permissions.
 
-### 📊 **Balance Reporting**
-Generates formatted summary reports of all accounts.
+### 💸 **Transaction Processing**
+Supports deposits and withdrawals with balance validation.
 
 ### 🔑 **Change PIN**
 Users can securely update their PIN anytime.
@@ -84,6 +84,7 @@ Users can securely update their PIN anytime.
 |------|-------------|
 | `BANK-MAIN.CBL` | Main menu driver program with ASCII art |
 | `LOGIN.CBL` | User authentication with PIN |
+| `REGISTER.CBL` | New user registration |
 | `INIT-DB.CBL` | Initializes `ACCOUNTS.DAT` with sample data |
 | `INIT-USERS.CBL` | Initializes `USERS.DAT` with sample users |
 | `TRANS-PROC.CBL` | Handles deposit and withdrawal transactions |
@@ -141,6 +142,7 @@ brew install gnucobol
 cobc -m INIT-DB.CBL
 cobc -m INIT-USERS.CBL
 cobc -m LOGIN.CBL
+cobc -m REGISTER.CBL
 cobc -m TRANS-PROC.CBL
 cobc -m REPORT-GEN.CBL
 cobc -m CHANGE-PIN.CBL
@@ -176,8 +178,9 @@ When you run the program, you'll see:
 
 === LOGIN MENU ===
 1. Login
-2. Init User Database (First Time Setup)
-3. Exit
+2. Register New User
+3. Init User Database (First Time Setup)
+4. Exit
 Option: 
 ```
 
@@ -228,6 +231,7 @@ Option:
 ledgercobol/
 ├── 📄 BANK-MAIN.CBL      # Main program with ASCII banner
 ├── 📄 LOGIN.CBL          # PIN authentication
+├── 📄 REGISTER.CBL       # New user registration
 ├── 📄 INIT-DB.CBL        # Account database initializer
 ├── 📄 INIT-USERS.CBL     # User database initializer
 ├── 📄 TRANS-PROC.CBL     # Transaction processor

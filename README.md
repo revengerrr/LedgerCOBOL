@@ -51,8 +51,8 @@ LedgerCOBOL is a **classic core banking system** implemented in COBOL, demonstra
 <tr>
 <td width="50%">
 
-### 🔐 **Secure Login System**
-PIN-based authentication with account lockout after 3 failed attempts.
+### **🔐 Secure Login System**
+Real PIN-based authentication with `SESSION.DAT` for secure session management. Account lockout after 3 failed attempts.
 
 ### 👥 **Role-Based Access Control**
 Three user roles with different dashboards and permissions.
@@ -267,11 +267,13 @@ Account: 1000000001
 
 | Feature | Description |
 |---------|-------------|
+| **Real Authentication** | Validates against `USERS.DAT` database |
+| **Session Management** | Login state saved to `SESSION.DAT` |
 | **PIN Authentication** | 6-digit PIN required for login |
 | **Account Lockout** | Locked after 3 failed attempts |
 | **Default PIN** | New users get PIN `000000`, must change |
 | **Role-Based Access** | Users only see their allowed features |
-| **Admin-Only User Creation** | Prevents unauthorized account creation |
+| **Session Cleanup** | Session file deleted on logout |
 
 ---
 

@@ -51,26 +51,26 @@ LedgerCOBOL is a **classic core banking system** implemented in COBOL, demonstra
 <tr>
 <td width="50%">
 
-### 🔐 **Login System**
-Secure PIN-based authentication with account lockout after 3 failed attempts.
+### 🔐 **Secure Login System**
+PIN-based authentication with account lockout after 3 failed attempts.
 
-### 📝 **User Registration**
-New users can register their own account with username and PIN.
+### 👥 **Role-Based Access Control**
+Three user roles with different dashboards and permissions.
 
-### 🗄️ **Database Initialization**
-Creates sample account and user data for testing.
+### 🛡️ **Admin-Only User Management**
+Only administrators can create new users - just like real banks.
 
 </td>
 <td width="50%">
 
-### 👥 **Role-Based Access**
-Three user roles: Admin, Teller, and Customer with different permissions.
-
 ### 💸 **Transaction Processing**
 Supports deposits and withdrawals with balance validation.
 
-### 🔑 **Change PIN**
-Users can securely update their PIN anytime.
+### 📊 **Balance Reporting**
+Generates formatted summary reports of all accounts.
+
+### 🔑 **PIN Management**
+Users can securely change their PIN. Default PIN for new users: `000000`.
 
 </td>
 </tr>
@@ -78,15 +78,29 @@ Users can securely update their PIN anytime.
 
 ---
 
+## 👥 **Role-Based Access Control**
+
+| Feature | Admin | Teller | Customer |
+|---------|:-----:|:------:|:--------:|
+| Create New User | ✅ | ✅ (Customer only) | ❌ |
+| View All Users | ✅ | ❌ | ❌ |
+| Init Account Database | ✅ | ❌ | ❌ |
+| Process Transactions | ✅ | ✅ | ✅ (Own account) |
+| View Reports | ✅ | ✅ | ✅ (Own balance) |
+| Change PIN | ✅ | ✅ | ✅ |
+
+---
+
 ## 📁 **Components**
 
 | File | Description |
 |------|-------------|
-| `BANK-MAIN.CBL` | Main menu driver program with ASCII art |
+| `BANK-MAIN.CBL` | Main program with role-based dashboards |
 | `LOGIN.CBL` | User authentication with PIN |
-| `REGISTER.CBL` | New user registration |
+| `CREATE-USER.CBL` | Admin/Teller create new users |
+| `LIST-USERS.CBL` | Admin view all users |
 | `INIT-DB.CBL` | Initializes `ACCOUNTS.DAT` with sample data |
-| `INIT-USERS.CBL` | Initializes `USERS.DAT` with sample users |
+| `INIT-USERS.CBL` | Initializes `USERS.DAT` with default admin |
 | `TRANS-PROC.CBL` | Handles deposit and withdrawal transactions |
 | `REPORT-GEN.CBL` | Generates account balance summary report |
 | `CHANGE-PIN.CBL` | Allows users to change their PIN |
@@ -142,7 +156,8 @@ brew install gnucobol
 cobc -m INIT-DB.CBL
 cobc -m INIT-USERS.CBL
 cobc -m LOGIN.CBL
-cobc -m REGISTER.CBL
+cobc -m CREATE-USER.CBL
+cobc -m LIST-USERS.CBL
 cobc -m TRANS-PROC.CBL
 cobc -m REPORT-GEN.CBL
 cobc -m CHANGE-PIN.CBL
@@ -159,69 +174,104 @@ BANK-MAIN.exe      # Windows
 
 ## 🖥️ **Usage**
 
-When you run the program, you'll see:
+### **First Time Setup**
+
+1. Run the program
+2. Select **"2. Init System (First Time Setup)"**
+3. This creates default admin user and sample accounts
+
+### **Login Menu**
 
 ```
-================================================
-                                                
-     LL      EEEEE  DDDD    GGGG  EEEEE RRRR    
-     LL      E      D   D  G      E     R   R   
-     LL      EEEE   D   D  G  GG  EEEE  RRRR    
-     LL      E      D   D  G   G  E     R  R    
-     LLLLL   EEEEE  DDDD    GGGG  EEEEE R   R   
-                                                
-              C O B O L                         
-                                                
-        Classic Core Banking System             
-                                                
-================================================
-
-=== LOGIN MENU ===
+=== SYSTEM LOGIN ===
 1. Login
-2. Register New User
-3. Init User Database (First Time Setup)
-4. Exit
-Option: 
+2. Init System (First Time Setup)
+3. Exit
+Option:
 ```
 
-After login:
+### **Default Admin Account**
+
+| Username | PIN | Role |
+|----------|-----|------|
+| ADMIN | 123456 | Administrator |
+
+> ⚠️ **Important:** Change the default admin PIN after first login!
+
+---
+
+### **Admin Dashboard**
 
 ```
 ========================================
-          === LEDGERCOBOL ===          
+        === ADMIN DASHBOARD ===        
 ========================================
-User: JOHN DOE
-Role: Customer
-Account: 1000000001
+User: ADMIN
+Role: Administrator
 ----------------------------------------
 
-1. Init Account Database
-2. Transaction (Deposit/Withdraw)
-3. Account Report
-4. Change PIN
-5. Logout & Exit
+--- User Management ---
+1. Create New User
+2. View All Users
 
-Option: 
+--- Account Management ---
+3. Init Account Database
+4. Process Transaction
+5. Account Report
+
+--- Settings ---
+6. Change My PIN
+
+9. Logout & Exit
 ```
 
-### **Default Users**
+### **Teller Dashboard**
 
-| Username | PIN | Role | Account |
-|----------|-----|------|---------|
-| ADMIN | 123456 | Administrator | - |
-| TELLER1 | 111111 | Teller | - |
-| JOHN DOE | 100001 | Customer | 1000000001 |
-| JANE SMITH | 100002 | Customer | 1000000002 |
-| BOB JOHNSON | 100003 | Customer | 1000000003 |
+```
+========================================
+        === TELLER DASHBOARD ===       
+========================================
 
-### **Role Permissions**
+--- Customer Service ---
+1. Create New Customer
+2. Process Transaction
+3. Account Report
 
-| Feature | Admin | Teller | Customer |
-|---------|:-----:|:------:|:--------:|
-| Init Account DB | ✅ | ✅ | ❌ |
-| Transactions | ✅ | ✅ | ✅ |
-| View Reports | ✅ | ✅ | ✅ |
-| Change PIN | ✅ | ✅ | ✅ |
+--- Settings ---
+4. Change My PIN
+
+9. Logout & Exit
+```
+
+### **Customer Dashboard**
+
+```
+========================================
+       === CUSTOMER DASHBOARD ===      
+========================================
+Account: 1000000001
+
+--- Banking Services ---
+1. Deposit / Withdraw
+2. View My Balance
+
+--- Settings ---
+3. Change My PIN
+
+9. Logout & Exit
+```
+
+---
+
+## 🔒 **Security Features**
+
+| Feature | Description |
+|---------|-------------|
+| **PIN Authentication** | 6-digit PIN required for login |
+| **Account Lockout** | Locked after 3 failed attempts |
+| **Default PIN** | New users get PIN `000000`, must change |
+| **Role-Based Access** | Users only see their allowed features |
+| **Admin-Only User Creation** | Prevents unauthorized account creation |
 
 ---
 
@@ -229,9 +279,10 @@ Option:
 
 ```
 ledgercobol/
-├── 📄 BANK-MAIN.CBL      # Main program with ASCII banner
+├── 📄 BANK-MAIN.CBL      # Main program with role-based menus
 ├── 📄 LOGIN.CBL          # PIN authentication
-├── 📄 REGISTER.CBL       # New user registration
+├── 📄 CREATE-USER.CBL    # Admin creates new users
+├── 📄 LIST-USERS.CBL     # Admin views all users
 ├── 📄 INIT-DB.CBL        # Account database initializer
 ├── 📄 INIT-USERS.CBL     # User database initializer
 ├── 📄 TRANS-PROC.CBL     # Transaction processor
@@ -254,9 +305,10 @@ ledgercobol/
 | Aspect | Details |
 |--------|---------|
 | **File Organization** | LINE SEQUENTIAL for portability |
-| **Record Format** | Fixed-length records (56 bytes) |
+| **Record Format** | Fixed-length records |
 | **Balance Storage** | Signed numeric with 2 decimals (`S9(13)V99`) |
 | **Cross-Platform** | Auto-detects OS for file operations |
+| **User Storage** | Sequential file with role-based records |
 
 ---
 

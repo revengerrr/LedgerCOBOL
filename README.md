@@ -51,8 +51,11 @@ LedgerCOBOL is a **classic core banking system** implemented in COBOL, demonstra
 <tr>
 <td width="50%">
 
+### 🔐 **Login System**
+Secure PIN-based authentication with account lockout after 3 failed attempts.
+
 ### 🗄️ **Database Initialization**
-Creates sample account data with pre-configured balances for testing.
+Creates sample account and user data for testing.
 
 ### 💸 **Transaction Processing**
 Supports real-time deposits and withdrawals with balance validation.
@@ -60,11 +63,14 @@ Supports real-time deposits and withdrawals with balance validation.
 </td>
 <td width="50%">
 
-### 📊 **Balance Reporting**
-Generates formatted summary reports of all accounts and total bank balance.
+### 👥 **Role-Based Access**
+Three user roles: Admin, Teller, and Customer with different permissions.
 
-### 🌐 **Cross-Platform**
-Auto-detects OS for file operations (Windows/Linux/macOS).
+### 📊 **Balance Reporting**
+Generates formatted summary reports of all accounts.
+
+### 🔑 **Change PIN**
+Users can securely update their PIN anytime.
 
 </td>
 </tr>
@@ -76,11 +82,15 @@ Auto-detects OS for file operations (Windows/Linux/macOS).
 
 | File | Description |
 |------|-------------|
-| `BANK-MAIN.CBL` | Main menu driver program |
+| `BANK-MAIN.CBL` | Main menu driver program with ASCII art |
+| `LOGIN.CBL` | User authentication with PIN |
 | `INIT-DB.CBL` | Initializes `ACCOUNTS.DAT` with sample data |
+| `INIT-USERS.CBL` | Initializes `USERS.DAT` with sample users |
 | `TRANS-PROC.CBL` | Handles deposit and withdrawal transactions |
 | `REPORT-GEN.CBL` | Generates account balance summary report |
-| `ACCOUNTS.CPY` | Copybook defining the account record structure |
+| `CHANGE-PIN.CBL` | Allows users to change their PIN |
+| `ACCOUNTS.CPY` | Copybook for account record structure |
+| `USERS.CPY` | Copybook for user record structure |
 
 ---
 
@@ -127,10 +137,13 @@ brew install gnucobol
 ### **Compilation & Execution**
 
 ```bash
-# Compile modules as shared libraries
+# Compile all modules as shared libraries
 cobc -m INIT-DB.CBL
+cobc -m INIT-USERS.CBL
+cobc -m LOGIN.CBL
 cobc -m TRANS-PROC.CBL
 cobc -m REPORT-GEN.CBL
+cobc -m CHANGE-PIN.CBL
 
 # Compile main program as executable
 cobc -x BANK-MAIN.CBL
@@ -147,34 +160,65 @@ BANK-MAIN.exe      # Windows
 When you run the program, you'll see:
 
 ```
-=== LEDGERCOBOL ===
-1. Init Database
-2. Transaction
-3. Report
-4. Exit
+================================================
+                                                
+     LL      EEEEE  DDDD    GGGG  EEEEE RRRR    
+     LL      E      D   D  G      E     R   R   
+     LL      EEEE   D   D  G  GG  EEEE  RRRR    
+     LL      E      D   D  G   G  E     R  R    
+     LLLLL   EEEEE  DDDD    GGGG  EEEEE R   R   
+                                                
+              C O B O L                         
+                                                
+        Classic Core Banking System             
+                                                
+================================================
+
+=== LOGIN MENU ===
+1. Login
+2. Init User Database (First Time Setup)
+3. Exit
 Option: 
 ```
 
-### **Sample Accounts**
-
-After initializing the database:
-
-| Account Number | Name | Balance |
-|----------------|------|---------|
-| 1000000001 | JOHN DOE | $5,000.00 |
-| 1000000002 | JANE SMITH | $12,500.50 |
-| 1000000003 | BOB JOHNSON | $100.00 |
-
-### **Transaction Example**
+After login:
 
 ```
---- TRANSACTION ---
-Account Number: 1000000001
-Type (D/W): D
-Amount: 500.00
-Deposit Ok.
-Saving...
+========================================
+          === LEDGERCOBOL ===          
+========================================
+User: JOHN DOE
+Role: Customer
+Account: 1000000001
+----------------------------------------
+
+1. Init Account Database
+2. Transaction (Deposit/Withdraw)
+3. Account Report
+4. Change PIN
+5. Logout & Exit
+
+Option: 
 ```
+
+### **Default Users**
+
+| Username | PIN | Role | Account |
+|----------|-----|------|---------|
+| ADMIN | 123456 | Administrator | - |
+| TELLER1 | 111111 | Teller | - |
+| JOHN DOE | 100001 | Customer | 1000000001 |
+| JANE SMITH | 100002 | Customer | 1000000002 |
+| BOB JOHNSON | 100003 | Customer | 1000000003 |
+
+### **Role Permissions**
+
+| Feature | Admin | Teller | Customer |
+|---------|:-----:|:------:|:--------:|
+| Init Account DB | ✅ | ✅ | ❌ |
+| Transactions | ✅ | ✅ | ✅ |
+| View Reports | ✅ | ✅ | ✅ |
+| Change PIN | ✅ | ✅ | ✅ |
 
 ---
 
@@ -182,11 +226,15 @@ Saving...
 
 ```
 ledgercobol/
-├── 📄 BANK-MAIN.CBL      # Main program
-├── 📄 INIT-DB.CBL        # Database initializer
+├── 📄 BANK-MAIN.CBL      # Main program with ASCII banner
+├── 📄 LOGIN.CBL          # PIN authentication
+├── 📄 INIT-DB.CBL        # Account database initializer
+├── 📄 INIT-USERS.CBL     # User database initializer
 ├── 📄 TRANS-PROC.CBL     # Transaction processor
 ├── 📄 REPORT-GEN.CBL     # Report generator
-├── 📄 ACCOUNTS.CPY       # Record copybook
+├── 📄 CHANGE-PIN.CBL     # PIN change module
+├── 📄 ACCOUNTS.CPY       # Account record copybook
+├── 📄 USERS.CPY          # User record copybook
 ├── 📁 assets/
 │   └── 🖼️ cobol-logo.jpeg
 ├── 📝 .gitignore

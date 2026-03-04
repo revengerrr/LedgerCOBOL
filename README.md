@@ -56,7 +56,7 @@ LedgerCOBOL is a **full-featured core banking system** implemented in COBOL, dem
 ### 🔐 **Real Authentication**
 PIN-based login with session management and account lockout.
 
-### 💱 **Transfer Antar Akun**
+### 💱 **Transfer Between Accounts**
 Send money between accounts with full validation.
 
 ### 📝 **Transaction History**
@@ -215,12 +215,12 @@ Role: Administrator
  2. View All Users
 
 --- Account Management ---
- 3. Create New Account (Rekening)
+ 3. Create New Account
  4. Init Account Database
 
 --- Transactions ---
  5. Deposit / Withdraw
- 6. Transfer Antar Akun
+ 6. Transfer Between Accounts
  7. Transaction History
 
 --- Reports ---
@@ -261,7 +261,7 @@ Account: 1000000001
 
 ```
 ========================================
-          TRANSFER ANTAR AKUN          
+        TRANSFER BETWEEN ACCOUNTS          
 ========================================
 
 From Account: 1000000001 (Your Account)

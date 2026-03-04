@@ -143,12 +143,12 @@
            DISPLAY ' 2. View All Users'.
            DISPLAY ' '.
            DISPLAY '--- Account Management ---'.
-           DISPLAY ' 3. Create New Account (Rekening)'.
+           DISPLAY ' 3. Create New Account'.
            DISPLAY ' 4. Init Account Database'.
            DISPLAY ' '.
            DISPLAY '--- Transactions ---'.
            DISPLAY ' 5. Deposit / Withdraw'.
-           DISPLAY ' 6. Transfer Antar Akun'.
+           DISPLAY ' 6. Transfer Between Accounts'.
            DISPLAY ' 7. Transaction History'.
            DISPLAY ' '.
            DISPLAY '--- Reports ---'.
@@ -202,11 +202,11 @@
            DISPLAY ' '.
            DISPLAY '--- Customer Service ---'.
            DISPLAY ' 1. Create New Customer (User)'.
-           DISPLAY ' 2. Create New Account (Rekening)'.
+           DISPLAY ' 2. Create New Account'.
            DISPLAY ' '.
            DISPLAY '--- Transactions ---'.
            DISPLAY ' 3. Deposit / Withdraw'.
-           DISPLAY ' 4. Transfer Antar Akun'.
+           DISPLAY ' 4. Transfer Between Accounts'.
            DISPLAY ' 5. Transaction History'.
            DISPLAY ' '.
            DISPLAY '--- Reports ---'.

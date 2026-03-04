@@ -80,7 +80,7 @@
 
            DISPLAY ' '.
            DISPLAY '========================================'.
-           DISPLAY '          TRANSFER ANTAR AKUN          '.
+           DISPLAY '        TRANSFER BETWEEN ACCOUNTS       '.
            DISPLAY '========================================'.
            DISPLAY ' '.
 

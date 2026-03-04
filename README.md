@@ -19,9 +19,9 @@
 <p align="center">
   <img src="https://img.shields.io/badge/COBOL-GnuCOBOL-blue?style=flat-square" alt="COBOL">
   <img src="https://img.shields.io/badge/AI-Ollama%20%2B%20Llama-purple?style=flat-square" alt="AI">
-  <img src="https://img.shields.io/badge/Version-3.5-orange?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/Blockchain-Solana-14F195?style=flat-square" alt="Solana">
+  <img src="https://img.shields.io/badge/Version-4.0-orange?style=flat-square" alt="Version">
   <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey?style=flat-square" alt="Platform">
-  <img src="https://img.shields.io/badge/Status-Production%20Ready-brightgreen?style=flat-square" alt="Status">
 </p>
 
 ---
@@ -338,10 +338,14 @@ ledgercobol/
 ├── 📄 USERS.CPY          # User copybook
 ├── 📄 HISTORY.CPY        # History copybook
 ├── 📁 ai-agent/          # 🤖 AI Integration
-│   ├── 🐍 ai_agent.py    # Python AI bridge
+│   ├── 🐍 ai_agent.py
 │   ├── 📋 requirements.txt
-│   ├── 🔧 setup.sh       # Linux/macOS setup
-│   ├── 🔧 setup.bat      # Windows setup
+│   ├── 🔧 setup.sh
+│   └── 📖 README.md
+├── 📁 blockchain/        # 🪙 Solana Integration
+│   ├── 🐍 solana_bridge.py
+│   ├── 📋 requirements.txt
+│   ├── 🔧 setup.sh
 │   └── 📖 README.md
 ├── 📁 assets/
 │   └── 🖼️ cobol-logo.jpeg
@@ -376,9 +380,9 @@ git push origin feature/amazing-feature
 
 ---
 
-## 🤖 **AI Agent (NEW!)**
+## 🤖 **AI Agent**
 
-LedgerCOBOL now supports **natural language commands** via AI!
+LedgerCOBOL supports **natural language commands** via AI!
 
 ```
 👤 You: "Transfer 500000 to account 1000000002"
@@ -388,8 +392,6 @@ LedgerCOBOL now supports **natural language commands** via AI!
        ✅ Transfer successful!
 ```
 
-### Quick Start
-
 ```bash
 cd ai-agent
 ./setup.sh          # Install dependencies
@@ -398,6 +400,30 @@ python ai_agent.py  # Run the agent
 ```
 
 📖 See [ai-agent/README.md](ai-agent/README.md) for full documentation.
+
+---
+
+## 🪙 **Solana Blockchain Integration**
+
+Every transaction gets recorded on **Solana blockchain** (Devnet) - creating an immutable audit trail!
+
+```
+COBOL Transaction → SHA256 Hash → Solana Devnet → Immutable Proof ✅
+```
+
+Features:
+- 🔗 **Real blockchain** - Verifiable on Solana Explorer
+- 🆓 **100% FREE** - Uses Devnet (test network)
+- 🔒 **Immutable** - Cannot be altered once recorded
+- 📊 **Auto-sync** - Syncs from COBOL HISTORY.DAT
+
+```bash
+cd blockchain
+pip install -r requirements.txt
+python solana_bridge.py
+```
+
+📖 See [blockchain/README.md](blockchain/README.md) for full documentation.
 
 ---
 
@@ -415,8 +441,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ---
 
-**v3.5** - Now with AI Agent! 🤖
+**v4.0** - COBOL + AI + Solana Blockchain 🚀
 
-**[🚀 Quick Start](#-quick-start)** • **[🤖 AI Agent](#-ai-agent-new)** • **[📖 Docs](#-components)** • **[🐛 Report Bug](https://github.com/YOUR_USERNAME/ledgercobol/issues)**
+**[🚀 Quick Start](#-quick-start)** • **[🤖 AI Agent](#-ai-agent)** • **[🪙 Blockchain](#-solana-blockchain-integration)** • **[📖 Docs](#-components)**
 
 </div>
